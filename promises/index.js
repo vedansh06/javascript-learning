@@ -150,5 +150,166 @@ Promise.all([promise5 , promise6 , promise7])
 
 
 
+const cart1 = ["shoes", "pants", "shirts"];
+
+const promise = createOrder(cart1); //!orderId
+console.log(promise);
+
+promise.then(function (orderId) {
+  console.log(orderId)
+
+  //todo proceedToPayment(orderId);
+
+});
+
+function createOrder(cart1) {
+  const pr = new Promise(function (resolve, reject) {
+
+    //!createOrder
+    //*validateCart
+    //?orderId
+
+    if (!validateCart(cart1)) {
+      const err = new Error("cart1 is not valid");
+
+      reject(err);
+    }
+
+    //todo logic for createOrder
+
+    const orderId = "12345";
+    if (orderId) {
+      setTimeout(function (){
+      resolve(orderId);
+
+      } , 5000)
+    }
+  });
+
+  return pr;
+}
+
+function validateCart(cart1){
+  return true;
+}
+
+
+
+const cart2 = ["shoes", "pants", "shirts"];
+
+const promise10 = createOrder(cart2); //!orderId
+
+promise10
+  .then(function (orderId) {
+    console.log(orderId);
+
+    // todo proceedToPayment(orderId);
+  })
+
+  .catch(function (err) {
+    console.log(err.message);
+  });
+
+//? producer
+
+function createOrder(cart2) {
+  const pr = new Promise(function (resolve, reject) {
+    //!createOrder
+    //*validateCart
+    //?orderId
+
+    if (!validateCart(cart2)) {
+      const err = new Error("Cart is not valid");
+
+      reject(err);
+    }
+
+    //todo logic for createOrder
+
+    const orderId = "12345";
+    if (orderId) {
+      setTimeout(function () {
+        resolve(orderId);
+      }, 5000);
+    }
+  });
+
+  return pr;
+}
+
+function validateCart(cart2) {
+  return false;
+}
+
+
+
+const cart3 = ["shoes", "pants", "shirts"];
+
+createOrder(cart3)
+  .then(function (orderId) {
+    console.log(orderId);
+    return orderId
+  })
+  .catch(function (err) {
+    console.log(err.message);
+  })
+  .then(function (orderId) {
+    return proceedToPayment(orderId)
+  })
+    .then (function (paymentInfo){
+    console.log(paymentInfo)
+  })
+   .then(function (orderId) {
+    console.log("no matter what happens , i will definitely be called");
+  })
+  
+
+//? producer
+
+function createOrder(cart3) {
+  const pr = new Promise(function (resolve, reject) {
+    //!createOrder
+    //*validateCart
+    //?orderId
+
+    if (!validateCart(cart3)) {
+      const err = new Error("Cart is not valid");
+
+      reject(err);
+    }
+
+    //todo logic for createOrder
+
+    const orderId = "12345";
+    if (orderId) {
+      setTimeout(function () {
+        resolve(orderId);
+      }, 5000);
+    }
+  });
+
+  return pr;
+}
+
+function proceedToPayment(orderId){
+
+return new Promise (function (resolve , reject){
+  resolve ("Payment Successful");
+})
+
+}
+
+function validateCart(cart3) {
+  return false;
+}
+
+
+
+
+
+
+
+
+
 
 
